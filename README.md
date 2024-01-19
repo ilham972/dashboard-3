@@ -31,12 +31,13 @@ height: 100%;
 
 - create 3 root folders inside (root),(dashboard),(auth) with own layout.tsx and (routes)for each except (dashboard)
 - move page.tsx inside (root)/(routes)
+
   > shadcn-ui@latest add - then select button, form , input , dialog(all shadcn components are constant export)
 
 ## clerk authentication
 
 - create .env and git ignore
-- git secret and paste to .env
+- get secret and paste to .env
   > npm install @clerk/nextjs
 - wrap the entire applicaition with <ClerkProvider>
 - dicid which page public which private so create middleware.ts and copy and paste from doc
