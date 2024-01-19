@@ -16,32 +16,36 @@
    > git remote add origin https://github.com/ilham972/dashboard-1.git
    > git push -u origin main
 
+   # shadcn init
+
    > npx shadcn-ui@latest init
 
-2. page.tsx(delete everything), layout.tsx(meta), global.tsx ->
-   (html,
-   body,
-   :root {
-   height: 100%;
-   })
+2. # clean
 
-   - create 3 root folders inside (root),(dashboard),(auth) with own layout.tsx and (routes)for each except (dashboard)
-   - move page.tsx inside (root)/(routes)
-     > shadcn-ui@latest add - then select button, form , input , dialog(all shadcn components are constant export)
+page.tsx(delete everything), layout.tsx(meta), global.tsx ->
+(html,
+body,
+:root {
+height: 100%;
+})
 
-   ## clerk authentication
+- create 3 root folders inside (root),(dashboard),(auth) with own layout.tsx and (routes)for each except (dashboard)
+- move page.tsx inside (root)/(routes)
+  > shadcn-ui@latest add - then select button, form , input , dialog(all shadcn components are constant export)
 
-   - create .env and git ignore
-   - git secret and paste to .env
-     > npm install @clerk/nextjs
-   - wrap the entire applicaition with <ClerkProvider>
-   - dicid which page public which private so create middleware.ts and copy and paste from doc
-   - create sign in , signup page
-     -- app/(auth)/(routes)/sign-up/[[...sign-up]]/page.tsx
-     -- now copy and paste from doc
-   - copy and paste envirenment variable into env
-   - go to localhost:3000
-   - (auth)/(routes)/layout.ts div style - flex items-center justify-center h-full - this will center the sign in card
+## clerk authentication
+
+- create .env and git ignore
+- git secret and paste to .env
+  > npm install @clerk/nextjs
+- wrap the entire applicaition with <ClerkProvider>
+- dicid which page public which private so create middleware.ts and copy and paste from doc
+- create sign in , signup page
+  -- app/(auth)/(routes)/sign-up/[[...sign-up]]/page.tsx
+  -- now copy and paste from doc
+- copy and paste envirenment variable into env
+- go to localhost:3000
+- (auth)/(routes)/layout.ts div style - flex items-center justify-center h-full - this will center the sign in card
 
 3. create distribution for modal
    providers/modal-provider.tsx/ - create modal provider
