@@ -5,6 +5,8 @@ import useStoreModal from "@/hooks/use-store-modal";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useState } from "react";
 
 import {
   Form,
@@ -22,6 +24,7 @@ const schema = z.object({
 
 const StoreModal = () => {
   const { isOpen, onClose } = useStoreModal();
+  const [loading, setLoading] = useState(false);
 
   const form = useForm({
     resolver: zodResolver(schema),
@@ -30,8 +33,16 @@ const StoreModal = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof schema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof schema>) => {
+    try {
+      setLoading(true);
+      const response = await axios.post("/api/stores", values);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+      alert("success");
+    }
   };
 
   return (
@@ -58,8 +69,12 @@ const StoreModal = () => {
               )}
             />
             <div className="flex justify-end space-x-2 items-center pt-6">
-              <Button variant={"outline"}>cancel</Button>
-              <Button type="submit">Continue</Button>
+              <Button disabled={loading} variant={"outline"}>
+                cancel
+              </Button>
+              <Button disabled={loading} type="submit">
+                Continue
+              </Button>
             </div>
           </form>
         </Form>
