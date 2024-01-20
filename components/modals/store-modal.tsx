@@ -7,6 +7,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useState } from "react";
+import { useToast } from "../ui/use-toast";
 
 import {
   Form,
@@ -26,6 +27,8 @@ const StoreModal = () => {
   const { isOpen, onClose } = useStoreModal();
   const [loading, setLoading] = useState(false);
 
+  const { toast } = useToast();
+
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -41,7 +44,10 @@ const StoreModal = () => {
       console.log(error);
     } finally {
       setLoading(false);
-      alert("success");
+      toast({
+        title: "Uh oh! Something went wrong.",
+        description: "Please try again later.",
+      });
     }
   };
 
