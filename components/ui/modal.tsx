@@ -6,7 +6,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-
 type ModalProps = {
   isOpen: boolean;
   title: string;
@@ -15,7 +14,13 @@ type ModalProps = {
   children?: React.ReactNode;
 };
 
-const Modal = ({ isOpen, title, description, onClose }: ModalProps) => {
+const Modal = ({
+  isOpen,
+  title,
+  description,
+  onClose,
+  children,
+}: ModalProps) => {
   {
     return (
       <Dialog open={isOpen} onOpenChange={(e) => !e && onClose()}>
@@ -24,7 +29,7 @@ const Modal = ({ isOpen, title, description, onClose }: ModalProps) => {
             <DialogTitle>{title}</DialogTitle>
             <DialogDescription>{description}</DialogDescription>
           </DialogHeader>
-          <div>children</div>
+          <div>{children}</div>
         </DialogContent>
       </Dialog>
     );
