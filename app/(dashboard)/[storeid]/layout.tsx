@@ -1,7 +1,16 @@
+type DashboardLayoutProps = {
+  children: React.ReactNode;
+  storeId: string;
+};
+
 export default function DashboardLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
-  return <div>DashboardLayout</div>;
+  storeId,
+}: DashboardLayoutProps) {
+  return (
+    <>
+      <div>DashboardLayout</div>
+      {children}
+    </>
+  );
 }

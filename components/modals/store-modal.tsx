@@ -6,8 +6,6 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { useState } from "react";
-import { useToast } from "../ui/use-toast";
 
 import {
   Form,
@@ -19,6 +17,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
+import { toast } from "../ui/use-toast";
+import { useState } from "react";
+
 const schema = z.object({
   name: z.string().min(1),
 });
@@ -26,8 +27,6 @@ const schema = z.object({
 const StoreModal = () => {
   const { isOpen, onClose } = useStoreModal();
   const [loading, setLoading] = useState(false);
-
-  const { toast } = useToast();
 
   const form = useForm({
     resolver: zodResolver(schema),
@@ -39,15 +38,16 @@ const StoreModal = () => {
   const onSubmit = async (values: z.infer<typeof schema>) => {
     try {
       setLoading(true);
+      toast({
+        title: "Creating Store",
+      });
       const response = await axios.post("/api/stores", values);
+
+      window.location.assign(`/${response.data.id}`);
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
-      toast({
-        title: "Uh oh! Something went wrong.",
-        description: "Please try again later.",
-      });
     }
   };
 
@@ -68,7 +68,11 @@ const StoreModal = () => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="E-commerce" {...field} />
+                    <Input
+                      disabled={loading}
+                      placeholder="E-commerce"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

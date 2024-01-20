@@ -1,7 +1,13 @@
-import React from "react";
+"use client";
+import { useEffect } from "react";
 
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <div>
+      <div>Dashboard</div>
+      {}
+    </div>
+  );
 };
 
 export default Dashboard;
